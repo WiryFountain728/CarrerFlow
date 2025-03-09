@@ -17,7 +17,7 @@ export default function CoursesPage() {
 
   useEffect(() => {
     if (user) {
-      fetch(`https://mlm-br0w.onrender.com/api/get-courses?userId=${user.id}`, {
+      fetch(`https://mlm-vrqj.onrender.com/api/get-courses?userId=${user.id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

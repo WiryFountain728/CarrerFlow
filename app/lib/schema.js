@@ -56,14 +56,46 @@ export const entrySchema = z
     }
   );
 
-export const resumeSchema = z.object({
-  contactInfo: contactSchema,
-  summary: z.string().min(1, "Professional summary is required"),
-  skills: z.string().min(1, "Skills are required"),
-  experience: z.array(entrySchema),
-  education: z.array(entrySchema),
-  projects: z.array(entrySchema),
-});
+
+
+  export const resumeSchema = z.object({
+    contactInfo: z.object({
+      professionalTitle: z.string().optional(),
+      email: z.string().email("Invalid email").optional(),
+      mobile: z.string().optional(),
+      city: z.string().optional(),
+      state: z.string().optional(),
+      linkedin: z.string().url("Invalid URL").optional(),
+    }),
+    summary: z.string().optional(),
+    skills: z.string().optional(),
+    experience: z.array(
+      z.object({
+        organization: z.string().optional(),
+        title: z.string().optional(),
+        startDate: z.string().optional(),
+        endDate: z.string().optional(),
+        description: z.string().optional(),
+      })
+    ).optional(),
+    education: z.array(
+      z.object({
+        organization: z.string().optional(),
+        title: z.string().optional(),
+        startDate: z.string().optional(),
+        endDate: z.string().optional(),
+      })
+    ).optional(),
+    projects: z.array(
+      z.object({
+        title: z.string().optional(),
+        startDate: z.string().optional(),
+        endDate: z.string().optional(),
+        description: z.string().optional(),
+      })
+    ).optional(),
+    jobDescription: z.string().optional(),
+  });
 
 export const coverLetterSchema = z.object({
   companyName: z.string().min(1, "Company name is required"),
